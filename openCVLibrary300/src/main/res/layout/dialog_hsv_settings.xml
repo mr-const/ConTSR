@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/h_lower_max_str"
+        android:text="@string/h_lower_max"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <SeekBar
+        android:id="@+id/h_lower_max"
+        android:max="179"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/h_upper_min_str"
+        android:text="@string/h_upper_min"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <SeekBar
+        android:id="@+id/h_upper_min"
+        android:max="179"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/s_min_str"
+        android:text="@string/s_min"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <SeekBar
+        android:id="@+id/s_min"
+        android:max="255"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/v_min_str"
+        android:text="@string/v_min"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <SeekBar
+        android:id="@+id/v_min"
+        android:max="255"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

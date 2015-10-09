@@ -1,0 +1,2 @@
+# to reduce repo bloating this libraries must be copied from the opencv sdk
+src/main/jniLibs/*

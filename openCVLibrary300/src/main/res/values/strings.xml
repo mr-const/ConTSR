@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="vm_normal">Normal</string>
+    <string name="vm_hsv">HSV</string>
+    <string name="settings_hsv">HSV Settings</string>
+    <string name="h_lower_max">Hue lower max (0 - h) %1$d</string>
+    <string name="h_upper_min">Hue upper min (h - 179) %1$d</string>
+    <string name="s_min">Saturation min (s - 255) %1$d</string>
+    <string name="v_min">Value min (s - 255) %1$d</string>
+</resources>
