@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity  implements CameraBridgeView
         }
     };
     private int mVMode = VM_NORMAL;
-    private int mHLowerMax = 20;
-    private int mHUpperMin = 160;
-    private int mSMin = 50;
-    private int mVMin = 50;
+    private int mHLowerMax = 10;
+    private int mHUpperMin = 165;
+    private int mSMin = 120;
+    private int mVMin = 120;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +111,11 @@ public class MainActivity extends AppCompatActivity  implements CameraBridgeView
         switch(item.getItemId()) {
             case R.id.menu_vm_normal:
                 mVMode = VM_NORMAL;
+                item.setChecked(true);
                 return true;
             case R.id.menu_vm_hsv:
                 mVMode = VM_HSV;
+                item.setChecked(true);
                 return true;
             case R.id.menu_settings_hsv:
                 _popHsvDialog();
