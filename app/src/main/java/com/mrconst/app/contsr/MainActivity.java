@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity  implements CameraBridgeView
                 case LoaderCallbackInterface.SUCCESS:
                 {
                     Log.i(TAG, "OpenCV loaded successfully");
+                    mOpenCvCameraView.setMaxFrameSize(960, 540);
                     mOpenCvCameraView.enableView();
                 } break;
                 default:
@@ -48,10 +49,10 @@ public class MainActivity extends AppCompatActivity  implements CameraBridgeView
         }
     };
     private int mVMode = VM_NORMAL;
-    private int mHLowerMax = 10;
-    private int mHUpperMin = 165;
-    private int mSMin = 120;
-    private int mVMin = 120;
+    private int mHLowerMax = 14;
+    private int mHUpperMin = 160;
+    private int mSMin = 80;
+    private int mVMin = 80;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity  implements CameraBridgeView
         Mat orig = new Mat();
         rgba.copyTo(orig);
         Imgproc.medianBlur(rgba, rgba, 5);
-        Imgproc.cvtColor(rgba, rgba, Imgproc.COLOR_RGB2HLS);
+        Imgproc.cvtColor(rgba, rgba, Imgproc.COLOR_RGB2HLS, 3);
         _redFilter(rgba, rgba);
         Imgproc.medianBlur(rgba, rgba, 5);
 
