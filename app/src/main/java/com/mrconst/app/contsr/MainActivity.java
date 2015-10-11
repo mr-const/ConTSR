@@ -18,6 +18,7 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -49,10 +50,10 @@ public class MainActivity extends AppCompatActivity  implements CameraBridgeView
         }
     };
     private int mVMode = VM_NORMAL;
-    private int mHLowerMax = 14;
-    private int mHUpperMin = 160;
-    private int mSMin = 80;
-    private int mVMin = 80;
+    private int mHLowerMax = 15;
+    private int mHUpperMin = 165;
+    private int mSMin = 110;
+    private int mVMin = 110;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,18 +172,36 @@ public class MainActivity extends AppCompatActivity  implements CameraBridgeView
         Core.addWeighted(lower, 1.0, upper, 1.0, 0.0, dst);
     }
 
+    public static void _gamma(Mat srcMat, Mat dstMat, double gamma)
+    {
+        double invGamma = 1.0/gamma;
+        Mat lutMat = new Mat(1, 256, CvType.CV_8UC1);
+
+        int size = (int)(lutMat.total() * lutMat.channels());
+        byte[] temp = new byte[size];
+        lutMat.get(0, 0, temp);
+
+        for(int j = 0; j < 256; ++j)
+        {
+            temp[j] = (byte)(Math.pow((double)j/255.0, invGamma)* 255.0);
+        }
+        lutMat.put(0, 0, temp);
+        Core.LUT(srcMat, lutMat, dstMat);
+    }
+
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat rgba = inputFrame.rgba();
         Mat orig = new Mat();
         rgba.copyTo(orig);
+        _gamma(rgba, rgba, 2.2);
         Imgproc.medianBlur(rgba, rgba, 5);
         Imgproc.cvtColor(rgba, rgba, Imgproc.COLOR_RGB2HLS, 3);
         _redFilter(rgba, rgba);
         Imgproc.medianBlur(rgba, rgba, 5);
 
         Mat circles = new Mat();
-        Imgproc.HoughCircles(rgba, circles, Imgproc.HOUGH_GRADIENT, 1.0, 20.0, 50, 30, 10, 100);
+        Imgproc.HoughCircles(rgba, circles, Imgproc.HOUGH_GRADIENT, 1.0, 20.0, 50, 30, 5, 1000);
 
         Mat dst;
         if (mVMode == VM_NORMAL) {
